@@ -1,0 +1,41 @@
+{
+  "name": "create-html-template-element",
+  "description": "Create an HTML <template> with content.",
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "Steven Vachon <contact@svachon.com> (https://svachon.com)",
+  "repository": "github:stevenvachon/create-html-template-element",
+  "main": "index-es5.js",
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "babel-plugin-add-module-exports": "^1.0.2",
+    "chai": "^4.2.0",
+    "mocha": "^6.1.4",
+    "parcel": "^1.12.3",
+    "puppeteer": "^1.15.0",
+    "rimraf": "^2.6.3"
+  },
+  "engines": {
+    "node": ">= 10"
+  },
+  "scripts": {
+    "build": "npm run build-release && npm run build-test",
+    "build-release": "babel index.js --out-file=index-es5.js --plugins=add-module-exports --presets=@babel/env --source-maps",
+    "build-test": "parcel build index-es5.js --global=createHTMLTemplateElement --log-level=1 --no-cache --out-dir='.' --out-file=temp.js --public-url='.'",
+    "posttest": "rimraf temp.js temp.js.map",
+    "prepublishOnly": "npm test",
+    "pretest": "npm run build",
+    "test": "mocha test.js --bail --check-leaks --timeout=5000"
+  },
+  "files": [
+    "index.js",
+    "index-es5.js",
+    "index-es5.js.map"
+  ],
+  "keywords": [
+    "html",
+    "template"
+  ]
+}
